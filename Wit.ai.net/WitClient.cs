@@ -1,14 +1,8 @@
-﻿using com.valgut.libs.bots.Wit.Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Wit.Ai.Net.Models;
 
-namespace com.valgut.libs.bots.Wit
+namespace Wit.Ai.Net
 {
     public class WitClient
     {
@@ -87,6 +81,28 @@ namespace com.valgut.libs.bots.Wit
             var content = response.Content;
 
             return JsonConvert.DeserializeObject<ConverseResponse>(content);
+        }
+
+        public Message GetSpeech(string fileName, string filePath, string msg_id = null, string thread_id = null)
+        {
+            var client = new RestClient("https://api.wit.ai");
+
+            var request = new RestRequest("speech", Method.POST);
+            request.AddQueryParameter("v", DEFAULT_API_VERSION);
+            request.AddHeader("Content-type", "audio/wav");
+            request.AddFile(fileName, filePath, "audio/wav");
+            if (msg_id != null)
+                request.AddQueryParameter("msg_id", msg_id);
+            if (thread_id != null)
+                request.AddQueryParameter("thread_id", thread_id);
+
+            request.AddHeader("Authorization", authValue);
+
+            // execute the request
+            IRestResponse response = client.Execute(request);
+            var content = response.Content;
+
+            return JsonConvert.DeserializeObject<Message>(content);
         }
     }
 }

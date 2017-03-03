@@ -1,11 +1,11 @@
-﻿using com.valgut.libs.bots.Wit.Models;
+﻿using Wit.Ai.Net.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace com.valgut.libs.bots.Wit
+namespace Wit.Ai.Net
 {
     public class WitConversation<T>
     {

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace com.valgut.libs.bots.Wit.Models
+namespace Wit.Ai.Net.Models
 {
     public class Message : WitApiResponse
     {
